@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>{% block title %}ONE STOP SHOP FOR YOUR SHOES{% endblock %}</h1>
+
+    {% for x in shoes %}
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">name of the shoe</h5>
+                <blockquote>{{ x['name'] }}</blockquote>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">image url of the shoe</h5>
+                <img src="https://picsum.photos/id/103/200/300" alt="{{ x['image'] }}" width="50px" height="50px">
+
+                <blockquote>{{ x['image'] }}</blockquote>
+            </div>
+        </div>
+
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">price of shoe</h5>
+                <blockquote>{{ x['price'] }}</blockquote>
+            </div>
+        </div>
+            <a href="{{ url_for("edit", id=x["id"])  }}">Modify shoe</a>
+            <br>
+            <a href="{{ url_for("delete", id=x["id"])  }}">remove shoe</a>
+        </div>
+    {% endfor %}
+<nav>
+
+        <a href="{{ url_for('add') }}"><blockquote>add more shoes to sell</blockquote></a>
+    </nav>
+{% endblock %}

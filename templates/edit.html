@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{%  block content %}
+    <h1>{% block title %} Add a new post {% endblock %}</h1>
+    <form method="post">
+
+        <br>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Enter Name of the shoe</h5>
+                <input type="text" name="title" value="{{ request.form['name_of_shoe'] }}"/>
+
+            </div>
+        </div>
+
+
+        <br>
+
+        <br>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Enter image url of the shoe</h5>
+                <textarea class="form-control" rows="5" id="comment">{{ request.form['image_url'] }}</textarea>
+
+            </div>
+        </div>
+
+        <br>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Enter price of the shoe</h5>
+                <input type="text" name="title" value="{{ request.form['price_of_shoe'] }}"/>
+
+            </div>
+        </div>
+
+
+
+
+
+        <button type="submit">Submit</button>
+    </form>
+
+{% endblock %}
