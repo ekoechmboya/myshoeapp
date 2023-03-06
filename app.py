@@ -2,14 +2,10 @@ import sqlite3
 from flask import Flask, render_template, request, url_for, flash, redirect, abort
 
 app = Flask(__name__)
-# generate secret key
-app.config['SECRET_KEY'] = '09c5d474925c3e4c306ee95fe8f3a3ef95eaec2e6e34ba8e'
+
+app.config['SECRET_KEY'] = 'b20b1f3b20bfa2fcd6fa76a8f64bbaa7c1a90e28a92a5328'
 
 
-# @app.route('/')
-# def hello_world():  # put application's code here
-#     return 'Hello World!'
-# connection to database
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
@@ -20,10 +16,9 @@ def get_shoes(shoes_id):
     conn = get_db_connection()
     shoes = conn.execute("SELECT * FROM shoes WHERE id = ?", (shoes_id,)).fetchone()
     conn.close()
-    # validate the post id exists
+
     if shoes is None:
         abort(404)
-    # when post is found
     return shoes
 
 
@@ -35,25 +30,25 @@ def index():
     return render_template('index.html', shoes=shoes)
 
 
-@app.route('/create/', methods=('GET', 'POST'))
+@app.route('/add/', methods=('GET', 'POST'))
 def add():
     if request.method == "POST":
         name = request.form['name']
         image = request.form['image']
         price = request.form['price']
         if not name:
-            flash("please enter name")
+            flash("name is required")
         elif not price:
-            flash("please enter price")
+            flash("price is required")
         elif not image:
-            flash("please enter image")
+            flash("image URL is required")
         else:
             conn = get_db_connection()
             conn.execute('INSERT INTO shoes (name, image, price) VALUES (?, ?, ?)', (name, image, price))
             conn.commit()
             conn.close()
             return redirect(url_for('index'))
-    return render_template('create.html')
+    return render_template('add.html')
 
 
 @app.route('/<int:id>/edit/', methods=('GET', 'POST'))

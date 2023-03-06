@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
-
 {% block content %}
-   <form method="post">
+    <h>{% block title %}CREATE NEW SHOES{% endblock %}</h>
+    <form method="post">
         <div class="mb-3 mt-3">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">image url of shoe</h5>
                     <h6 class="card-subtitle mb-2 text-muted">url is required</h6>
-                    <input type="name" name ="image" class="form-control"  id="image" value="{{ request.form['image'] or shoes["image"]}}">
+                    <input type="name" name ="image" class="form-control"  id="image" value="{{ request.form['image'] }}">
 
                 </div>
             </div>
@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <h5 class="card-title">name of shoe</h5>
                     <h6 class="card-subtitle mb-2 text-muted">name is required</h6>
-                    <input type="text" name="name" class="form-control" id="name" value="{{ request.form['name'] or shoes["name"]}}">
+                    <input type="text" name="name" class="form-control" id="name" value="{{ request.form['name'] }}">
                 </div>
             </div>
         </div>
@@ -26,10 +26,11 @@
                 <div class="card-body">
                     <h5 class="card-title">price of shoe</h5>
                     <h6 class="card-subtitle mb-2 text-muted">price is required</h6>
-                    <input class="form-control" type="text" name="price"  id="number" value="{{ request.form['price'] or shoes["price"]}}">
+                    <input class="form-control" type="text" name="price"  id="number" value="{{ request.form['price'] }}">
                 </div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+
 {% endblock %}
